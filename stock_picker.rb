@@ -1,23 +1,31 @@
-require 'pry'
-
 def stock_picker(stock_prices)
-# buy low sell high
-# find maximum difference between low and high days.
 
-  stock_prices.each_with_index do |day,index|
-    max_diff = stock_prices[index..-1].minmax{|buy,sell| sell-buy}
-    memo = max_diff if stock_prices(max_diff) > stock_prices(memo)
+max_value = {profit: 0}
+
+stock_prices.each_with_index do |buy_value, index|
+  sell_value = stock_prices.slice(index..-1).max
+  sell_day = stock_prices.rindex(sell_value)
+  profit   =   sell_value - buy_value
+
+    if profit > max_value[:profit]
+      max_value = {
+        sell_day:    sell_day,
+        sell_value:  sell_value,
+        buy_day:     index,
+        buy_value:   stock_prices[index],
+        profit:      profit
+      }
+    end
   end
 
-"#{memo} for a profit of $#{stock_prices[memo[1]]-stock_prices[memo[0]]}"
-
+output =  "[#{max_value[:buy_day]}, #{max_value[:sell_day]}] for a profit of " \
+          "#{max_value[:sell_value]} - #{max_value[:buy_value]} = #{max_value[:profit]}"
 end
 
 
 def run
 # desired output => [1,4]  # for a profit of $15 - $3 == $12
 puts stock_picker([17,3,6,9,15,8,6,1,10])
-
 end
 
 

@@ -35,3 +35,15 @@ def shift(letter, z_value)
 end
 
 end
+
+def run
+puts "Please input your message"
+message = gets.chomp.strip
+puts "Please input your key"
+shift = gets.chomp.to_i
+code = Cipher.new(message,shift)
+code.to_s
+end
+
+
+run if __FILE__ == $0

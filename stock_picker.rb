@@ -18,8 +18,8 @@ stock_prices.each_with_index do |buy_value, index|
     end
   end
 
-output =  "[#{max_value[:buy_day]}, #{max_value[:sell_day]}] for a profit of " \
-          "#{max_value[:sell_value]} - #{max_value[:buy_value]} = #{max_value[:profit]}"
+output =  "[#{max_value[:buy_day]},#{max_value[:sell_day]}] for a profit of " \
+          "$#{max_value[:sell_value]} - $#{max_value[:buy_value]} = $#{max_value[:profit]}"
 end
 
 
